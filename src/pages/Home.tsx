@@ -1,14 +1,15 @@
 import Header from "../components/Header";
 import Banner from "../assets/img/pexels-atbo-66986-245208.jpg";
 import { Box } from "@mui/material";
+import Categories from "./Categories";
 // import { useNavigate } from "react-router-dom";
 
 function Home() {
   //   const navigate = useNavigate();
   return (
-    <Box>
+    <>
       <Header />
-      {/* Make parent Box relative so overlay works */}
+      {/* Banner */}
       <Box sx={{ position: "relative", width: "100%", height: "95vh" }}>
         <img
           src={Banner}
@@ -76,7 +77,8 @@ function Home() {
           </button>
         </Box>
       </Box>
-    </Box>
+      <Categories />
+    </>
   );
 }
 
