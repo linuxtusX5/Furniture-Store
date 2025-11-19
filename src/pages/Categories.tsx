@@ -1,3 +1,7 @@
+import React, { useState, useEffect } from "react";
+import { categoryAPI } from "../services/api";
+import type { Category } from "../types";
+import { CategoryCard } from "../components/CategoryCard";
 import {
   Box,
   Card,
@@ -8,7 +12,22 @@ import {
   CardMedia,
 } from "@mui/material";
 
-function Categories() {
+export const Categories: React.FC = () => {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadCategories();
+  }, []);
+
+  const loadCategories = async () => {
+    try {
+      const response = await categoryAPI.getAll();
+      setCategories(response.data);
+    } catch (error) {
+      console.error("Error loading categories: ", error);
+    }
+  };
   return (
     <Box sx={{ background: "#F9F5EE" }}>
       <h1
@@ -33,36 +52,12 @@ function Categories() {
         Explore our carefully curated collections
       </p>
       <Box sx={{ display: "flex", justifyContent: "center", gap: "30px" }}>
-        <Card
-          sx={{ minWidth: 350, background: "#F9F5EE", borderStyle: "none" }}
-        >
-          <CardContent sx={{ padding: "0px" }}>
-            <CardMedia
-              sx={{ height: 250 }}
-              image="/src/assets/img/pexels-fotoaibe-1643383.jpg"
-              title="green iguana"
-            />
-            <Box sx={{ margin: "20px" }}>
-              <Typography
-                variant="h5"
-                component="div"
-                sx={{
-                  fontFamily: "Didot",
-                  fontSize: "2rem",
-                  fontWeight: "bold",
-                }}
-              >
-                Living Room
-              </Typography>
-              <Typography sx={{ color: "text.secondary", mb: 1.5 }}>
-                Comfort Meets Style
-              </Typography>
-            </Box>
-          </CardContent>
-        </Card>
+        {categories.map((cat) => (
+          <CategoryCard key={cat.id} category={cat} />
+        ))}
       </Box>
     </Box>
   );
-}
+};
 
 export default Categories;
