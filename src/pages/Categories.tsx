@@ -2,15 +2,7 @@ import React, { useState, useEffect } from "react";
 import { categoryAPI } from "../services/api";
 import type { Category } from "../types";
 import { CategoryCard } from "../components/CategoryCard";
-import {
-  Box,
-  Card,
-  CardContent,
-  Typography,
-  CardActions,
-  Button,
-  CardMedia,
-} from "@mui/material";
+import { Box } from "@mui/material";
 
 export const Categories: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -51,7 +43,14 @@ export const Categories: React.FC = () => {
       >
         Explore our carefully curated collections
       </p>
-      <Box sx={{ display: "flex", justifyContent: "center", gap: "30px" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "30px",
+          paddingBottom: "50px",
+        }}
+      >
         {categories.map((cat) => (
           <CategoryCard key={cat.id} category={cat} />
         ))}
