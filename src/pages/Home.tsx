@@ -2,6 +2,11 @@ import Header from "../components/Header";
 import Banner from "../assets/img/pexels-atbo-66986-245208.jpg";
 import { Box } from "@mui/material";
 import Categories from "./Categories";
+import ProductList from "./ProductList";
+import { About } from "./About";
+import MarQuee from "../components/Marquee";
+import ReviewCarousel from "../components/ProductReviews";
+import { Footer } from "../components/Footer";
 // import { useNavigate } from "react-router-dom";
 
 function Home() {
@@ -77,7 +82,13 @@ function Home() {
           </button>
         </Box>
       </Box>
+      <MarQuee />
       <Categories />
+      <ProductList />
+      <MarQuee />
+      <About />
+      <ReviewCarousel />
+      <Footer />
     </>
   );
 }
