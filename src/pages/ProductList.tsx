@@ -15,7 +15,7 @@ export const ProductList: React.FC = () => {
   const loadCategories = async () => {
     try {
       const response = await productAPI.getAll();
-      setCategories(response.data);
+      setCategories(response.data.results);
     } catch (error) {
       console.error("Error loading categories: ", error);
     }
