@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { categoryAPI } from "../services/api";
-import type { Category } from "../types";
+import type { Category, PaginatedResponse } from "../types";
 import { CategoryCard } from "../components/CategoryCard";
 import { Box } from "@mui/material";
 
@@ -15,13 +15,15 @@ export const Categories: React.FC = () => {
   const loadCategories = async () => {
     try {
       const response = await categoryAPI.getAll();
-      setCategories(response.data);
+      const data: PaginatedResponse<Category> = response.data;
+      // console.log("API RESPONSE:", response.data);
+      setCategories(data.results);
     } catch (error) {
       console.error("Error loading categories: ", error);
     }
   };
   return (
-    <Box sx={{ background: "#F9F5EE" }}>
+    <Box sx={{ background: "#F9F5EE", paddingBottom: "100px" }}>
       <h1
         style={{
           fontSize: "5rem",
@@ -48,7 +50,6 @@ export const Categories: React.FC = () => {
           display: "flex",
           justifyContent: "center",
           gap: "30px",
-          paddingBottom: "50px",
         }}
       >
         {categories.map((cat) => (
