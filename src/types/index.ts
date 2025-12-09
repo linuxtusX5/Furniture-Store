@@ -1,10 +1,19 @@
 export interface Category {
   id: number;
   name: string;
-  image: string | null;
   description: string;
-  slug: string;
+  image: string;
+  created_at: string;
+  products_count: number;
 }
+
+export interface PaginatedResponse<T> {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: T[];
+}
+
 export interface Product {
   id: number;
   category: number;
